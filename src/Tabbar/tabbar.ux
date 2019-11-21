@@ -1,0 +1,88 @@
+<!-- 引入自定义的模板 -->
+<!-- 引入首页 -->
+<import name="index" src="../Page1/page1.ux"></import>
+<import name="login" src="../Page2/page2.ux"></import>
+
+<template>
+    <div class="container">
+        <block if="{{flag==0}}">
+            <!-- 显示主界面 -->
+            <index></index>
+        </block>
+        <block elif="{{flag==1}}">	
+            <!--显示"登录"页面-->	
+            <login></login>	
+        </block>	
+        <block elif="{{flag==2}}">	
+            <!--显示"登录"页面-->	
+            <login></login>	
+        </block>	
+        <!-- 底部导航栏 -->
+        <tabs>
+            <tab-bar class="footer-container">
+                <!-- 遍历tabBar.list,生产导航栏 -->
+                <block for='tabBar.list'>
+                    <div class="footer-item" onclick="setIndex($idx)">
+                    <!-- $idx为tabBar.list的当前索引值，以0开始 -->
+                    <!-- 如果选中当前界面 -->
+                        <block if='{{$idx==flag}}'>
+                            <!-- 图标 -->
+                            <image src="{{tabBar.list[$idx].selected_icon}}" class="footer-item-img"></image>
+                            <!--页面标签值-->	
+                            <text class="tab-text" style="color: {{tabBar.list[$idx].selected_color}}">{{tabBar.list[$idx].name}}</text>
+                        </block>
+                        <!--当前页面未被选中-->	
+                        <block else>	
+                            <image src="{{tabBar.list[$idx].icon}}" class="footer-item-img"></image>	
+                            <text class="tab-text" style="color: {{tabBar.list[$idx].color}}">{{tabBar.list[$idx].name}}</text>	
+                        </block>
+                    </div>
+                </block>
+            </tab-bar>
+        </tabs>
+    </div>
+</template>
+
+<style src="./tabbar.css"></style>
+
+<script>
+module.exports = {
+  data: {
+    flag: 0,
+    tabBar: {
+      list: [{
+        name: '首页',
+        icon: '../Common/res/home3.png',
+        color: '#898989',
+        selected_color: '#55c5ff',
+        selected_icon: '../Common/res/home2.png'
+      },{
+        name: '功能',
+        icon: '../Common/res/anything3.png',
+        color: '#898989',
+        selected_color: '#55c5ff',
+        selected_icon: '../Common/res/anything2.png'
+      },{
+        name: '登录',
+        icon: '../Common/res/people3.png',
+        color: '#898989',
+        selected_color: '#55c5ff',
+        selected_icon: '../Common/res/people2.png'
+      }]
+
+    }
+  },
+  //   初始化，进入界面加载的事件
+  onInit(){
+
+  },
+  //   修改flag实现点击导航栏显示不同的界面，pos为传入的参数
+  setIndex: function (pos){
+    this.flag = pos
+  }
+}
+</script>
+
+
+ 
+ 

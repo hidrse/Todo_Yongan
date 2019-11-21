@@ -1,0 +1,132 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="demo-page">
+  <div class="bar_QRcode">
+      <image src="../Common/res/ic_qr.png" style="object-fit:none;"></image>
+  </div>
+  <div class="scan_QRcode">
+    <image src="../Common/res/scan.png" style="object-fit:none;"></image>
+  </div>
+  <div class="state_pic">
+    <div class="scan_text">
+      <text class="scan_text1">扫一扫~</text>
+      <text class="scan_text2">请扫描店家给出的二维码</text>
+    </div>
+    <image src="../Common/res/tick_in_circle.png" style="object-fit:none;"></image>
+  </div>
+  <div class="function_btns">
+    <div class="function_btn">
+      <image src="../Common/res/ic_eye.png" style="object-fit:none;"></image>
+      <text class="btn_text">实时监控</text>
+    </div>
+     <div class="function_btn">
+      <image src="../Common/res/ic_first_aid.png" style="object-fit:none;"></image>
+      <text class="btn_text">急救知识</text>
+    </div>
+     <div class="function_btn">
+      <image src="../Common/res/ic_call.png" style="object-fit:none;"></image>
+      <text class="btn_text">一键呼救</text>
+    </div>
+  </div>
+  </div>
+</template>
+
+<script>
+import router from '@system.router'
+import webview from '@system.webview'
+
+export default {
+  // 页面级组件的数据模型，影响传入数据的覆盖机制：private内定义的属性不允许被覆盖
+  private: {
+    scan_text1: '扫一扫~',
+    scan_text2: '请扫描店家给出的二维码',
+    btn_text1: '实时监控',
+    btn_text2: '急救知识',
+    btn_text3: '一键呼救',
+  },
+  routeDetail () {
+    // 跳转到应用内的某个页面，router用法详见：文档->接口->页面路由
+    router.push ({
+      uri: '/login_register'
+    })
+  },
+  openWebSite(){
+    webview.loadUrl({
+      url: 'https://www.quickapp.cn/'
+    })
+  },
+}
+</script>
+
+<style>
+   /*字体只支持网络字体文件或绝对路径，字体设置暂时无效 */
+  @font-face {
+      font-family: myfont;
+      src: url(../Common/FZDBSJW.TTF);
+    }
+  .demo-page {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+     height: 100%;
+    width: 100%;
+    background-image: url(../Common/res/back_page2.png);
+    background-position: center;
+  }
+
+  .bar_QRcode{
+    padding-left: 600px;
+    padding-bottom: 30px;
+  }
+
+  .scan_QRcode{
+    padding-top: 50px;
+    margin-bottom: 150px;
+  }
+  .state_pic{
+    margin-top: 100px;
+  }
+
+  .scan_text {
+    margin-right: 80px;
+    flex-direction: column;
+  }
+  .scan_text1{
+    padding-bottom: 20px;
+    font-size: 50px;
+    text-align: left;
+    font-weight: bold;
+    color:#55C5FF;
+  }
+  .scan_text2{
+    font-size: 25px;
+    text-align: left;
+    color:#55C5FF;
+  }
+  
+  .function_btns{
+    margin-top: 100px;
+  }
+
+  .function_btn{
+    flex-direction: column;
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+
+  .btn_text{
+    padding-top: 20px;
+    color: #55C5FF;
+    font-weight: bold;
+  }
+
+  .btn {
+    width: 550px;
+    height: 86px;
+    margin-top: 75px;
+    border-radius: 43px;
+    background-color: #09ba07;
+    font-size: 30px;
+    color: #ffffff;
+  }
+</style>
